@@ -20,19 +20,19 @@ The solver uses Google OR-Tools' CP-SAT constraint solver. Before it prints anyt
 
 ## Input
 
-The league is described as JSON with two keys:
+The league is described as JSON with 2-3 keys:
 
 ```json
 {
   "divisions": [[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]],
-  "losers": [1, 2, 3, 4, 5],
+  "losers": [1, 3, 5, 7, 10],
   "featured": [3, 7]
 }
 ```
 
 `featured` is optional: two teams that must play each other in week 1. When it is present and the schedule is shuffled (the default), the solver finds the first week where the two teams meet and swaps that entire week's slate with week 1. If they already meet in week 1, nothing changes. `--static` output ignores the featured requirement.
 
-Both divisions must hold exactly 5 distinct teams, for 10 teams total. Team ids are integers from 1 to 9999, rendered zero-padded to four digits in output. Exactly 5 loser teams must be listed, and they must belong to the league.
+Both divisions must hold exactly 5 distinct teams, for 10 teams total. Team ids are integers from 1 to 9999, rendered zero-padded to four digits in output. Exactly 5 loser teams must be listed, and they must belong to the league.  ("Loser" teams are the four teams who didn't make the playoffs, plus the lowest-seeded playoff team.)
 
 Team ids may also be written as zero-padded strings, matching the output format, and both forms can be mixed:
 
